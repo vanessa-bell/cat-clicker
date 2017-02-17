@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "This project is inspired by the assignment in Udacity's [Javascript Design Patterns course](https://www.udacity.com/course/javascript-design-patterns--ud989).",
   "main": "index.js",
+  "engines": {
+  	"node": "4.4.7"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "postinstall": "bower install"
   },
   "author": "Vanessa Bell",
   "license": "ISC",
