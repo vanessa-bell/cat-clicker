@@ -3,6 +3,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 
 const app = express()
+//dynamic port -- esp. important for deployment
 const port = process.env.PORT || 2587
 
 app.engine('.hbs', exphbs({
