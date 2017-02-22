@@ -1,14 +1,14 @@
 $(function() {
 	var model = {
-		init: function() {
-			this.cats = [
-				{name: 'Beebo', clicks: 0, img:'http://static.boredpanda.com/blog/wp-content/uploads/2015/06/pallas-cat-manul-7__880.jpg'},
-				{name: 'Jonny', clicks: 0, img:'https://newbloggycat.files.wordpress.com/2015/07/funny-karate-cat.jpg'},
-				{name: 'Susie', clicks: 0, img: "https://www.petfinder.com/wp-content/uploads/2012/11/99233806-bringing-home-new-cat-632x475.jpg"},
-				{name: 'Ron', clicks: 0, img: "https://static.pexels.com/photos/126407/pexels-photo-126407.jpeg"},
-				{name: 'Boothang', clicks: 0, img: "http://www.rd.com/wp-content/uploads/sites/2/2016/04/01-cat-wants-to-tell-you-laptop.jpg"}
-			];
-		},
+		currentCat: null,
+		cats: [
+				{name: 'Beebo', clicks: 0, img:'http://static.boredpanda.com/blog/wp-content/uploads/2015/06/pallas-cat-manul-7__880.jpg', imgAttribution: "http://www.boredpanda.com/" },
+				{name: 'Jonny', clicks: 0, img:'https://newbloggycat.files.wordpress.com/2015/07/funny-karate-cat.jpg', imgAttribution: 'https://newbloggycat.com/'},
+				{name: 'Susie', clicks: 0, img: "https://www.petfinder.com/wp-content/uploads/2012/11/99233806-bringing-home-new-cat-632x475.jpg", imgAttribution: 'https://www.petfinder.com/cats/bringing-a-cat-home/bringing-home-new-cat/99233806-bringing-home-new-cat-632x475/'},
+				{name: 'Ron', clicks: 0, img: "https://static.pexels.com/photos/126407/pexels-photo-126407.jpeg", imgAttribution: 'https://www.pexels.com/'},
+				{name: 'Boothang', clicks: 0, img: "http://www.rd.com/wp-content/uploads/sites/2/2016/04/01-cat-wants-to-tell-you-laptop.jpg", imgAttribution: 'http://www.rd.com/advice/pets/how-to-decode-your-cats-behavior/'}
+			],
+		
 		incrementClicks: function(name) {
 			for(var i = 0; i < this.cats.length; i++) {
 				if(this.cats[i].name === name) {
@@ -30,7 +30,6 @@ $(function() {
 
 	var controller = {
 		init: function() {
-			model.init();
 			catView.init();
 			catList.init();
 		},
@@ -50,6 +49,7 @@ $(function() {
 			this.catImage = $('#cat-image');
 			this.catName = $('#cat-name');
 			this.catClicks = $('#cat-clicks');
+			this.figcaption = $('#figcaption'); 
 			var cats = controller.getCats();
 			catView.render(cats[0].name);
 			this.catImage.on('click', function() {
@@ -64,6 +64,7 @@ $(function() {
 				this.catImage.attr("src",cat.img);
 				this.catImage.attr("name",cat.name);
 				this.catName.html(cat.name);
+				this.figcaption.html('Image courtesy of: <a href="' + cat.imgAttribution + '">' + cat.imgAttribution + '</a>');
 				if(cat.clicks === 1) {
 					this.catClicks.html(cat.name + " has been clicked " + cat.clicks + " time");
 				} else {
